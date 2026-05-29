@@ -20,6 +20,7 @@
           animation: {
             'spin-slow': 'spin 12s linear infinite',
             'pulse-fast': 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'progress': 'progress 1.5s ease-in-out infinite',
           }
         }
       }
@@ -58,6 +59,14 @@
     .animate-slideUp {
       animation: slideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
+    @keyframes progress {
+      0% { width: 0%; }
+      50% { width: 100%; }
+      100% { width: 100%; }
+    }
+    .animate-progress {
+      animation: progress 1.5s ease-in-out;
+    }
   </style>
 </head>
 <body class="h-full text-slate-100 antialiased flex flex-col selection:bg-emerald-500 selection:text-slate-950">
@@ -91,16 +100,16 @@
         <div class="flex flex-col gap-1.5">
           <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Select Validator Node Identity</label>
           <div class="grid grid-cols-2 gap-2">
-            <button type="button" onclick="selectLoginPreset('Auditor', 'Tata Corp Auditor', '0xAuditor77fA921dEE226C2eB4A9910E34b')" class="preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200">
+            <button type="button" onclick="selectLoginPreset('Auditor', 'Tata Corp Auditor', '0xAuditor77fA921dEE226C2eB4A9910E34b')" class="preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-slate-950 border-slate-850 hover:border-emerald-500/50 hover:bg-slate-900">
               🏢 Corporate Auditor
             </button>
-            <button type="button" onclick="selectLoginPreset('Collector', 'Raju Prasad', '0xCollector88eF2090FbaA29d99723049F')" class="preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200">
+            <button type="button" onclick="selectLoginPreset('Collector', 'Raju Prasad', '0xCollector88eF2090FbaA29d99723049F7b21C0')" class="preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-slate-950 border-slate-850 hover:border-emerald-500/50 hover:bg-slate-900">
               📱 Field Collector
             </button>
-            <button type="button" onclick="selectLoginPreset('Aggregator', 'Dharavi Sorters', '0xAggregator44bA88dEE21bEA9810E3')" class="preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200">
+            <button type="button" onclick="selectLoginPreset('Aggregator', 'Dharavi Sorters', '0xAggregator44bA88dEE21bEA9810E34b')" class="preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-slate-950 border-slate-850 hover:border-emerald-500/50 hover:bg-slate-900">
               🏭 Sorter Aggregator
             </button>
-            <button type="button" onclick="selectLoginPreset('Citizen', 'Aditi Rao', '0xCitizen33aE75bC110F921bEA9810E34b')" class="preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200">
+            <button type="button" onclick="selectLoginPreset('Citizen', 'Aditi Rao', '0xCitizen33aE75bC110F921bEA9810E34b')" class="preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-slate-950 border-slate-850 hover:border-emerald-500/50 hover:bg-slate-900">
               🏡 Citizen Portal
             </button>
           </div>
@@ -108,17 +117,17 @@
 
         <div class="flex flex-col gap-1.5">
           <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Public Key Credentials Hash</label>
-          <input type="text" id="login-address" placeholder="0x..." class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 font-mono focus:outline-none focus:border-emerald-500 w-full" required>
+          <input type="text" id="login-address" placeholder="0x..." class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 font-mono focus:outline-none focus:border-emerald-500/50 transition-all">
         </div>
 
         <div class="border-t border-slate-800 pt-4 flex flex-col items-center gap-3">
-          <button type="button" id="biometric-trigger" onclick="triggerBiometricVerification()" class="w-16 h-16 rounded-full flex items-center justify-center transition-all bg-slate-950 border border-slate-800 text-slate-400 hover:bg-slate-900 hover:text-emerald-400 shadow-md">
+          <button type="button" id="biometric-trigger" onclick="triggerBiometricVerification()" class="w-16 h-16 rounded-full flex items-center justify-center transition-all bg-slate-950 border border-slate-850 hover:border-emerald-500/50 text-2xl">
             👆
           </button>
           <p id="biometric-status" class="text-[10px] uppercase font-bold text-slate-500 tracking-wider">Tap to scan secure local hardware keypair</p>
         </div>
 
-        <button type="submit" class="w-full bg-emerald-500 text-slate-950 font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md">
+        <button type="submit" class="w-full bg-emerald-500 text-slate-950 font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md hover:bg-emerald-400">
           Initialize Sync Sequence
         </button>
       </form>
@@ -127,11 +136,11 @@
         <div class="grid grid-cols-2 gap-3">
           <div class="flex flex-col gap-1.5">
             <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Node Name / Operator</label>
-            <input type="text" id="register-name" placeholder="e.g. Raju Prasad" class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 focus:outline-none focus:border-indigo-500" required>
+            <input type="text" id="register-name" placeholder="e.g. Raju Prasad" class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 focus:outline-none focus:border-emerald-500/50">
           </div>
           <div class="flex flex-col gap-1.5">
             <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Network Role</label>
-            <select id="register-role" onchange="adjustRegisterInputs()" class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 focus:outline-none">
+            <select id="register-role" onchange="adjustRegisterInputs()" class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 focus:outline-none focus:border-emerald-500/50">
               <option value="Auditor">🏢 Corporate Auditor</option>
               <option value="Collector">📱 Field Collector</option>
               <option value="Aggregator">🏭 Sorter Aggregator</option>
@@ -142,12 +151,12 @@
 
         <div id="register-field-gstin" class="flex flex-col gap-1.5">
           <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Corporate GSTIN Registry</label>
-          <input type="text" id="register-gstin" placeholder="e.g. 27AAAAA1111A1Z1" class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 focus:outline-none">
+          <input type="text" id="register-gstin" placeholder="e.g. 27AAAAA1111A1Z1" class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 focus:outline-none focus:border-emerald-500/50">
         </div>
 
         <div id="register-field-ward" class="hidden flex flex-col gap-1.5">
           <label class="text-xs font-bold text-slate-400 uppercase tracking-wider">Assigned Sourcing Ward</label>
-          <select id="register-ward" class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 focus:outline-none">
+          <select id="register-ward" class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-slate-300 focus:outline-none focus:border-emerald-500/50">
             <option value="Sector 3, Dharavi">Sector 3, Dharavi</option>
             <option value="Sector 7, Kurla Hub">Sector 7, Kurla Hub</option>
             <option value="Sion Scrap Loop">Sion Scrap Loop</option>
@@ -156,23 +165,23 @@
         </div>
 
         <div class="flex flex-col gap-2">
-          <button type="button" onclick="generateKeysForRegistration()" class="w-full bg-slate-950 hover:bg-slate-900 border border-slate-800 text-slate-300 text-xs py-2.5 rounded-xl font-bold flex items-center justify-center gap-2">
-            Generate Cryptographic Keypair
+          <button type="button" onclick="generateKeysForRegistration()" class="w-full bg-slate-950 hover:bg-slate-900 border border-slate-800 text-slate-300 text-xs py-2.5 rounded-xl font-bold flex items-center justify-center gap-2 transition-all">
+            🔐 Generate Cryptographic Keypair
           </button>
           
           <div id="register-key-details" class="hidden bg-slate-950 p-4 rounded-xl border border-slate-850 flex flex-col gap-2 text-[11px] animate-slideUp">
             <div>
               <p class="text-slate-500 font-bold uppercase tracking-wider">Generated Public Address</p>
-              <p id="register-pub-addr" class="font-mono text-indigo-400 select-all"></p>
+              <p id="register-pub-addr" class="font-mono text-indigo-400 select-all break-all"></p>
             </div>
             <div>
               <p class="text-slate-500 font-bold uppercase tracking-wider mt-1.5">Mnemonic Phrase Key</p>
-              <p id="register-mnemonic" class="font-mono text-slate-400 italic bg-slate-900/60 p-2 rounded border border-slate-800/40"></p>
+              <p id="register-mnemonic" class="font-mono text-slate-400 italic bg-slate-900/60 p-2 rounded border border-slate-800/40 break-all"></p>
             </div>
           </div>
         </div>
 
-        <button type="submit" class="w-full bg-indigo-500 text-white font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md">
+        <button type="submit" class="w-full bg-indigo-500 text-white font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all shadow-md hover:bg-indigo-400">
           Sign and Lock Node
         </button>
       </form>
@@ -222,40 +231,40 @@
         <div class="bg-slate-900/50 border border-slate-900 rounded-2xl p-4 flex flex-col gap-1.5">
           <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-2 mb-2">Operator Portals</p>
           
-          <button onclick="switchTab('playbook')" id="nav-playbook" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('playbook')" id="nav-playbook" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
             <span class="text-base">🎯</span>
             <span class="flex-1 text-left">Interactive Playbook</span>
             <span class="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>
           </button>
 
-          <button onclick="switchTab('deck')" id="nav-deck" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('deck')" id="nav-deck" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:bg-slate-800">
             <span class="text-base">📊</span>
             <span>Interactive Pitch Deck</span>
           </button>
 
           <div class="h-px bg-slate-900 my-2"></div>
 
-          <button onclick="switchTab('household')" id="nav-household" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('household')" id="nav-household" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:bg-slate-800">
             <span class="text-base">🏡</span>
             <span>1. Citizen Sourcing</span>
           </button>
 
-          <button onclick="switchTab('collector')" id="nav-collector" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('collector')" id="nav-collector" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:bg-slate-800">
             <span class="text-base">📱</span>
             <span>2. Collector Terminal</span>
           </button>
 
-          <button onclick="switchTab('aggregator')" id="nav-aggregator" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('aggregator')" id="nav-aggregator" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:bg-slate-800">
             <span class="text-base">🏭</span>
             <span>3. Aggregator Node</span>
           </button>
 
-          <button onclick="switchTab('recycler')" id="nav-recycler" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('recycler')" id="nav-recycler" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:bg-slate-800">
             <span class="text-base">🏢</span>
             <span>4. Recycler Market</span>
           </button>
 
-          <button onclick="switchTab('ledger')" id="nav-ledger" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('ledger')" id="nav-ledger" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:bg-slate-800">
             <span class="text-base">⛓️</span>
             <span>5. Ledger Explorer</span>
           </button>
@@ -263,19 +272,25 @@
           <div class="h-px bg-slate-900 my-2"></div>
           <p class="text-[10px] font-bold uppercase tracking-widest text-slate-500 px-2 mb-1">Advanced Engines</p>
 
-          <button onclick="switchTab('wallet')" id="nav-wallet" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('wallet')" id="nav-wallet" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:bg-slate-800">
             <span class="text-base">👛</span>
             <span>Eco-Wallet & Gas</span>
           </button>
 
-          <button onclick="switchTab('ai-classifier')" id="nav-ai-classifier" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('ai-classifier')" id="nav-ai-classifier" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:bg-slate-800">
             <span class="text-base">🤖</span>
             <span>AI Sourcing Scanner</span>
           </button>
 
-          <button onclick="switchTab('consensus')" id="nav-consensus" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all">
+          <button onclick="switchTab('consensus')" id="nav-consensus" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-300 hover:bg-slate-800">
             <span class="text-base">🤝</span>
             <span>Consensus Monitor</span>
+          </button>
+          
+          <div class="h-px bg-slate-900 my-2"></div>
+          <button onclick="handleLogout()" class="nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-red-400 hover:bg-red-950/30 border border-red-500/30">
+            <span class="text-base">🚪</span>
+            <span>Logout</span>
           </button>
         </div>
 
@@ -288,8 +303,8 @@
           <div id="ai-chat-logs" class="max-h-36 overflow-y-auto flex flex-col gap-2 pr-1 text-[11px] leading-relaxed custom-scrollbar"></div>
 
           <form onsubmit="handleAIChatSubmit(event)" class="flex gap-1.5 mt-1 font-sans">
-            <input type="text" id="ai-query-input" placeholder="Ask circular metrics..." class="bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-[10px] text-white flex-1 focus:outline-none focus:border-indigo-500">
-            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white px-2.5 rounded-lg text-[10px] font-bold">Ask</button>
+            <input type="text" id="ai-query-input" placeholder="Ask circular metrics..." class="bg-slate-950 border border-slate-800 rounded-lg px-2 py-1.5 text-[10px] text-white flex-1 focus:outline-none focus:border-emerald-500/50">
+            <button type="submit" class="bg-indigo-600 hover:bg-indigo-500 text-white px-2.5 rounded-lg text-[10px] font-bold transition-all">Ask</button>
           </form>
         </div>
 
@@ -331,7 +346,7 @@
             </h2>
 
             <p class="text-slate-300 max-w-2xl leading-relaxed text-sm md:text-base font-medium">
-              By tracking physical recyclables directly from low-literacy field agents to certified factories, EcoLedger constructs immutable supply records, protecting brand owners from legal liabilities under Extended Producer Responsibility guidelines.
+              By tracking physical recyclables directly from low-literacy field agents to certified factories, EcoLedger constructs immutable supply records, protecting brand owners from legal liability.
             </p>
 
             <div class="h-px bg-slate-800 my-1"></div>
@@ -439,7 +454,7 @@
             <div class="bg-slate-950 border border-slate-900 rounded-2xl p-6 md:p-8 relative min-h-[340px] flex flex-col justify-between overflow-hidden">
               <div class="absolute right-0 bottom-0 w-80 h-80 bg-gradient-to-br from-indigo-500/[0.03] to-transparent pointer-events-none"></div>
               
-              <div id="slide-content-block"></div>
+              <div id="slide-content-block"><p class="text-slate-400">Pitch deck loading...</p></div>
 
               <div class="flex justify-between items-center mt-6 pt-4 border-t border-slate-900 text-xs text-slate-500 font-mono">
                 <span>EcoLedger Venture Architecture</span>
@@ -462,29 +477,29 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-bold text-slate-300 uppercase">Home Name / Identity ID</label>
-                <input type="text" id="hh-input-name" placeholder="e.g. Priya Venkat" class="bg-slate-950 border border-slate-850 px-4 py-3 rounded-xl text-xs focus:outline-none focus:border-emerald-500 text-white placeholder-slate-650" required>
+                <input type="text" id="hh-input-name" placeholder="e.g. Priya Venkat" class="bg-slate-950 border border-slate-850 px-4 py-3 rounded-xl text-xs focus:outline-none focus:border-emerald-500/50" required>
               </div>
               <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-bold text-slate-300 uppercase">Residential Sector</label>
-                <select id="hh-input-sector" class="bg-slate-950 border border-slate-850 px-4 py-3 rounded-xl text-xs focus:outline-none text-white"></select>
+                <select id="hh-input-sector" class="bg-slate-950 border border-slate-850 px-4 py-3 rounded-xl text-xs focus:outline-none text-white" required></select>
               </div>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-bold text-slate-300 uppercase">Material Classification</label>
-                <select id="hh-input-type" class="bg-slate-950 border border-slate-850 px-4 py-3 rounded-xl text-xs focus:outline-none text-white"></select>
+                <select id="hh-input-type" class="bg-slate-950 border border-slate-850 px-4 py-3 rounded-xl text-xs focus:outline-none text-white" required></select>
               </div>
               <div class="flex flex-col gap-1.5">
                 <label class="text-xs font-bold text-slate-300 uppercase">Estimated Weight</label>
                 <div class="relative">
-                  <input type="number" id="hh-input-weight" placeholder="0.00" step="0.1" class="bg-slate-950 border border-slate-850 pl-4 pr-12 py-3 rounded-xl text-xs focus:outline-none text-white w-full font-mono" required>
+                  <input type="number" id="hh-input-weight" placeholder="0.00" step="0.1" class="bg-slate-950 border border-slate-850 pl-4 pr-12 py-3 rounded-xl text-xs focus:outline-none text-white w-full" required>
                   <span class="absolute right-4 top-3 text-xs font-bold text-slate-500">KG</span>
                 </div>
               </div>
             </div>
 
-            <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs uppercase tracking-widest py-3.5 rounded-xl hover:from-emerald-400 transition-all shadow-md">
+            <button type="submit" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 text-slate-950 font-black text-xs uppercase tracking-widest py-3.5 rounded-xl hover:from-emerald-400 hover:to-teal-400 transition-all">
               Schedule Drop & Receive Rewards
             </button>
           </form>
@@ -493,197 +508,6 @@
             <h4 class="text-xs font-bold uppercase text-slate-500 tracking-wider mb-3">Sourcing Demand Pool</h4>
             <div id="household-demand-pool" class="flex flex-col gap-2 max-h-48 overflow-y-auto pr-1 custom-scrollbar"></div>
           </div>
-        </section>
-
-        <section id="tab-collector" class="tab-pane hidden max-w-md mx-auto w-full bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
-          <div class="bg-slate-950 px-6 py-3.5 flex justify-between items-center border-b border-slate-900">
-            <div class="flex items-center gap-1.5">
-              <span class="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span>
-              <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Active Scales Connected</p>
-            </div>
-            <div class="flex gap-1.5">
-              <button onclick="setCollectorLang('en')" id="lang-btn-en" class="text-[9px] font-bold px-2 py-1 rounded bg-emerald-500 text-slate-950 transition-all">EN</button>
-              <button onclick="setCollectorLang('hi')" id="lang-btn-hi" class="text-[9px] font-bold px-2 py-1 rounded bg-slate-900 text-slate-400 transition-all">HI</button>
-              <button onclick="setCollectorLang('mr')" id="lang-btn-mr" class="text-[9px] font-bold px-2 py-1 rounded bg-slate-900 text-slate-400 transition-all">MR</button>
-            </div>
-          </div>
-
-          <div class="p-6 flex flex-col gap-4">
-            <div>
-              <h3 id="dict-title" class="text-lg font-bold text-white">Collector Handheld Terminal</h3>
-              <p id="dict-sub" class="text-xs text-slate-400 leading-relaxed mt-0.5">Voice-driven, high-contrast interface designed for informal collectors.</p>
-            </div>
-
-            <div class="bg-slate-950 border border-slate-900 p-4 rounded-xl flex flex-col gap-3">
-              <p id="dict-voice-title" class="text-[10px] uppercase font-bold text-emerald-400">Intelligent Audio Guidance Support</p>
-              
-              <div class="flex items-center gap-4">
-                <button type="button" onclick="startSpeechToText()" id="voice-stt-btn" class="p-3 rounded-full transition-all bg-slate-800 text-red-400 hover:bg-slate-700">🎤</button>
-                <button type="button" onclick="playVoiceGuidance()" id="voice-tts-btn" class="p-3 rounded-full transition-all bg-slate-800 text-emerald-400 hover:bg-slate-700">🔊</button>
-
-                <div class="flex-1">
-                  <p id="dict-voice-status" class="text-[11px] text-slate-300 font-semibold leading-relaxed">Tap microphone icon and speak weight metrics</p>
-                  <canvas id="voice-canvas" width="160" height="20" class="mt-1 bg-transparent block"></canvas>
-                </div>
-              </div>
-
-              <div class="pt-2 border-t border-slate-900 flex flex-wrap gap-2">
-                <button type="button" onclick="showVocalSimulator()" class="text-[10px] text-indigo-400 hover:text-indigo-300 font-bold transition-all flex items-center gap-1">
-                  💬 <span id="dict-sim-btn">Simulate Spoken Audio Voice Input</span>
-                </button>
-              </div>
-            </div>
-
-            <div id="vocal-simulator-drawer" class="hidden bg-slate-950 p-4 rounded-xl border border-indigo-500/30 flex flex-col gap-3 animate-slideUp">
-              <div class="flex justify-between items-center">
-                <span class="text-[10px] font-bold text-indigo-400 uppercase">Spoken Voice Simulator</span>
-                <button type="button" onclick="hideVocalSimulator()" class="text-slate-500 hover:text-white text-xs">✕</button>
-              </div>
-              <div class="grid grid-cols-2 gap-2">
-                <button type="button" onclick="simulateVoiceInput('12.5', 'Twelve point five kilograms')" class="p-2 bg-slate-900 hover:bg-slate-850 rounded border border-slate-800 text-left text-[11px] text-white">"12.5 kg"</button>
-                <button type="button" onclick="simulateVoiceInput('24.0', 'Twenty four kilos')" class="p-2 bg-slate-900 hover:bg-slate-850 rounded border border-slate-800 text-left text-[11px] text-white">"24.0 kg"</button>
-              </div>
-            </div>
-
-            <form onsubmit="submitCollectorBatch(event)" class="flex flex-col gap-4">
-              <div class="flex flex-col gap-1.5">
-                <label id="dict-col-name" class="text-[10px] font-bold text-slate-400 uppercase">Collector Identity / Card ID</label>
-                <input type="text" id="col-input-name" class="bg-slate-950 border border-slate-850 px-4 py-2.5 rounded-xl text-xs text-white" required>
-              </div>
-
-              <div class="grid grid-cols-2 gap-3">
-                <div class="flex flex-col gap-1.5">
-                  <label id="dict-origin" class="text-[10px] font-bold text-slate-400 uppercase">Household Sourcing Origin</label>
-                  <select id="col-input-source" onchange="syncCollectorFormWithSource()" class="bg-slate-950 border border-slate-850 px-3 py-2.5 rounded-xl text-xs text-white focus:outline-none"></select>
-                </div>
-                <div class="flex flex-col gap-1.5">
-                  <label id="dict-quality" class="text-[10px] font-bold text-slate-400 uppercase">Quality Grade Rating</label>
-                  <select id="col-input-quality" class="bg-slate-950 border border-slate-850 px-3 py-2.5 rounded-xl text-xs text-white focus:outline-none">
-                    <option value="A-Grade">A-Grade (Clean)</option>
-                    <option value="B-Grade">B-Grade (Standard)</option>
-                    <option value="C-Grade">C-Grade (Organic Mixed)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div class="flex flex-col gap-1.5">
-                <label id="dict-material" class="text-[10px] font-bold text-slate-400 uppercase">Select Waste Classification</label>
-                <div id="col-material-matrix" class="grid grid-cols-2 gap-2"></div>
-              </div>
-
-              <div class="flex flex-col gap-1.5">
-                <label id="dict-weight" class="text-[10px] font-bold text-slate-400 uppercase">Weight Entry (Direct Digital Scale Link)</label>
-                <div class="relative">
-                  <input type="number" id="col-input-weight" step="0.1" placeholder="0.00" class="bg-slate-950 border border-slate-850 px-4 py-3 rounded-xl text-sm font-bold focus:outline-none text-white w-full font-mono" required>
-                  <span class="absolute right-4 top-3 text-xs font-bold text-slate-500">KG</span>
-                </div>
-              </div>
-
-              <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex justify-between items-center mt-2">
-                <div>
-                  <p id="dict-est-payout" class="text-[10px] uppercase font-bold text-slate-500">Direct Cash Payout Guarantee</p>
-                  <p id="dict-payout-label" class="text-[10px] text-slate-400 mt-0.5">Paid instantly upon dropoff verification</p>
-                </div>
-                <p id="col-estimated-payout" class="text-xl font-black text-emerald-400 font-mono">₹0</p>
-              </div>
-
-              <button type="submit" id="dict-submit" class="w-full bg-emerald-500 text-slate-950 font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all mt-2 animate-pulse">
-                Sign & Broadcast Lot To Ledger
-              </button>
-            </form>
-          </div>
-        </section>
-
-        <section id="tab-aggregator" class="tab-pane hidden flex flex-col gap-6">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex justify-between items-center animate-slideUp">
-              <div>
-                <span class="text-[9px] font-bold bg-indigo-500/20 text-indigo-400 px-2.5 py-0.5 rounded-full border border-indigo-500/30 uppercase">Dharavi Node A</span>
-                <h4 class="text-base font-extrabold text-white mt-1.5">Dharavi Sorters Assoc.</h4>
-                <p class="text-xs text-slate-400">Processing capacity: 15,000kg</p>
-              </div>
-              <div class="text-right">
-                <p class="text-[10px] uppercase text-slate-500 font-bold">Accuracy Index</p>
-                <p class="text-lg font-black text-emerald-400 font-mono">98.4% Clean</p>
-              </div>
-            </div>
-
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-2xl flex justify-between items-center animate-slideUp">
-              <div>
-                <span class="text-[9px] font-bold bg-indigo-500/20 text-indigo-400 px-2.5 py-0.5 rounded-full border border-indigo-500/30 uppercase">Kurla Node B</span>
-                <h4 className="text-base font-extrabold text-white mt-1.5">Kurla Recyclers Ltd</h4>
-                <p class="text-xs text-slate-400">Processing capacity: 8,000kg</p>
-              </div>
-              <div class="text-right">
-                <p class="text-[10px] uppercase text-slate-500 font-bold">Accuracy Index</p>
-                <p class="text-lg font-black text-emerald-400 font-mono">94.1% Clean</p>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-4 border-b border-slate-800 mb-6">
-              <div>
-                <h3 class="text-lg font-bold text-white">Sorter Consolidator Console</h3>
-                <p class="text-xs text-slate-400">Consolidate multiple small field collections into high-density containers with secure cryptographic Merkle proofs.</p>
-              </div>
-              <button id="consolidate-btn" onclick="executeAggregatorConsolidation()" class="hidden bg-indigo-500 hover:bg-indigo-400 text-white font-black text-xs px-4.5 py-2.5 rounded-xl transition-all shadow-md animate-pulse">
-                Consolidate Selected Batches
-              </button>
-            </div>
-
-            <div class="overflow-x-auto">
-              <table class="w-full text-left text-xs border-collapse">
-                <thead>
-                  <tr class="border-b border-slate-800 text-slate-500 uppercase text-[10px]">
-                    <th class="py-3 px-2 w-12">Select</th>
-                    <th class="py-3 px-2">Batch ID</th>
-                    <th class="py-3 px-2">Collector Identifier</th>
-                    <th class="py-3 px-2">Material Type</th>
-                    <th class="py-3 px-2">Source ID</th>
-                    <th class="py-3 px-2 text-right">Net Weight</th>
-                    <th class="py-3 px-2">Ledger Status</th>
-                  </tr>
-                </thead>
-                <tbody id="aggregator-batches-body" class="divide-y divide-slate-850"></tbody>
-              </table>
-            </div>
-          </div>
-        </section>
-
-        <section id="tab-recycler" class="tab-pane hidden flex flex-col gap-6">
-          <div class="bg-slate-900 border border-slate-800 rounded-3xl p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 animate-slideUp">
-            <div>
-              <h3 class="text-lg font-bold text-white">Corporate Compliance Portal</h3>
-              <p class="text-xs text-slate-400 mt-1">Acquire physical material lots to legally fulfill Extended Producer Responsibility goals.</p>
-            </div>
-            <div class="w-full md:w-64">
-              <div class="flex justify-between items-center text-xs text-slate-400 mb-1.5">
-                <span>EPR Target Status:</span>
-                <span class="font-bold text-white">84% Sourced</span>
-              </div>
-              <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-850">
-                <div class="bg-gradient-to-r from-emerald-500 to-teal-400 h-full w-[84%] rounded-full animate-pulse"></div>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col gap-4">
-            <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider">Audit Demographics configuration</h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="flex flex-col gap-1.5">
-                <label class="text-[10px] text-slate-400 uppercase font-bold">Company Legal Name</label>
-                <input type="text" id="compliance-company" class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none" value="Tata Beverage Corporation">
-              </div>
-              <div class="flex flex-col gap-1.5">
-                <label class="text-[10px] text-slate-400 uppercase font-bold">GST registration GSTIN</label>
-                <input type="text" id="compliance-gstin" class="bg-slate-950 border border-slate-800 rounded-xl px-4 py-2.5 text-xs text-white focus:outline-none" value="27AAAAA1111A1Z1">
-              </div>
-            </div>
-          </div>
-
-          <div id="containers-market-grid" class="grid grid-cols-1 md:grid-cols-2 gap-4"></div>
-          <div id="active-certificate-pane" class="hidden"></div>
         </section>
 
         <section id="tab-ledger" class="tab-pane hidden flex flex-col gap-6 font-mono">
@@ -701,175 +525,42 @@
           </div>
         </section>
 
-        <section id="tab-wallet" class="tab-pane hidden flex flex-col gap-6">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 col-span-2">
-              <div class="flex justify-between items-start border-b border-slate-850 pb-4 mb-4">
-                <div>
-                  <span class="text-[9px] font-black uppercase text-slate-400 bg-slate-950 border border-slate-800 px-2 py-0.5 rounded font-mono">Mumbai CBDC Link</span>
-                  <h3 class="text-lg font-bold text-white mt-2">Collector Financial Micro-Wallet</h3>
-                  <p id="wallet-address" class="text-xs text-slate-500 font-mono mt-0.5 truncate select-all">0xCollector88eF2090FbaA29d99723049F7b21C0</p>
-                </div>
-                <span class="text-xs font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 px-2.5 py-1 rounded-full">
-                  Escrow Secure
-                </span>
-              </div>
-
-              <div class="grid grid-cols-2 gap-4 mb-6">
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-900">
-                  <p class="text-[10px] text-slate-500 uppercase font-bold">Instantly Cashable Balance</p>
-                  <p id="wallet-balance" class="text-2xl font-black text-white mt-1 font-mono">₹2,400.00</p>
-                </div>
-                <div class="bg-slate-950 p-4 rounded-xl border border-slate-900">
-                  <p class="text-[10px] text-slate-500 uppercase font-bold">Sealed Escrow Reserve</p>
-                  <p id="wallet-escrow" class="text-2xl font-black text-slate-400 mt-1 font-mono">₹450.00</p>
-                </div>
-              </div>
-
-              <div class="flex flex-col md:flex-row justify-between items-center gap-4 bg-slate-950 p-4 rounded-xl border border-slate-900">
-                <div>
-                  <p class="text-xs font-bold text-slate-300">Registered Mobile UPI Payment Address</p>
-                  <p id="wallet-upi" class="text-xs text-slate-500 mt-0.5 font-mono">rajusort@okhdfcmumbai</p>
-                </div>
-                <button onclick="executeWalletCashout()" class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs uppercase tracking-widest px-6 py-3 rounded-xl transition-all shadow-md">
-                  Instant Cashout (UPI Transfer)
-                </button>
-              </div>
+        <section id="tab-collector" class="tab-pane hidden max-w-md mx-auto w-full bg-slate-900 border border-slate-800 rounded-3xl overflow-hidden shadow-2xl flex flex-col">
+          <div class="bg-slate-950 px-6 py-3.5 flex justify-between items-center border-b border-slate-900">
+            <div class="flex items-center gap-1.5">
+              <span class="w-2 h-2 bg-emerald-400 rounded-full animate-ping"></span>
+              <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Collector Terminal</p>
             </div>
-
-            <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 flex flex-col justify-between">
-              <div>
-                <h3 class="text-sm font-bold text-white">EVM Gas Optimizer Node</h3>
-                <p class="text-xs text-slate-400 mt-1 leading-relaxed">Adjust validation speeds to handle scale sensor surges during peak sorting hours.</p>
-                
-                <div class="flex flex-col gap-3 mt-4">
-                  <button id="gas-btn-Eco" onclick="setGasMode('Eco')" class="p-3 rounded-xl border text-left flex justify-between items-center bg-slate-950 border-slate-900 text-slate-400 transition-all hover:border-slate-800">
-                    <div>
-                      <p class="text-xs font-bold">Eco</p>
-                      <p class="text-[10px] text-slate-500 font-mono">1.2 Gwei</p>
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-400">12 secs</span>
-                  </button>
-                  
-                  <button id="gas-btn-Standard" onclick="setGasMode('Standard')" class="p-3 rounded-xl border text-left flex justify-between items-center bg-emerald-500/10 border-emerald-500 text-white transition-all">
-                    <div>
-                      <p class="text-xs font-bold">Standard</p>
-                      <p class="text-[10px] text-slate-500 font-mono">3.5 Gwei</p>
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-400">3 secs</span>
-                  </button>
-                  
-                  <button id="gas-btn-Fast" onclick="setGasMode('Fast')" class="p-3 rounded-xl border text-left flex justify-between items-center bg-slate-950 border-slate-900 text-slate-400 transition-all hover:border-slate-800">
-                    <div>
-                      <p class="text-xs font-bold">Fast</p>
-                      <p class="text-[10px] text-slate-500 font-mono">8.4 Gwei</p>
-                    </div>
-                    <span class="text-[10px] font-bold text-emerald-400">Instant</span>
-                  </button>
-                </div>
-              </div>
-
-              <p id="gas-stats-p" class="text-[10px] text-slate-500 mt-4 leading-relaxed font-mono">
-                Active gas limit configured for blockchain propagation. Congestion level: 38%.
-              </p>
-            </div>
-
           </div>
-        </section>
 
-        <section id="tab-ai-classifier" class="tab-pane hidden flex flex-col gap-6">
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl md:col-span-1">
-              <h3 class="text-sm font-bold text-white mb-2">Classify Sourced Lots</h3>
-              <p class="text-xs text-slate-400 leading-relaxed mb-4">Choose a simulated material image bundle below to run neural network classification checks.</p>
-              <div id="ai-preset-container" class="flex flex-col gap-3"></div>
+          <div class="p-6 flex flex-col gap-4">
+            <div>
+              <h3 class="text-lg font-bold text-white">Field Collection Portal</h3>
+              <p class="text-xs text-slate-400 leading-relaxed mt-0.5">Log waste collections and earn instant rewards.</p>
             </div>
 
-            <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl md:col-span-2 flex flex-col justify-between">
-              <div class="flex justify-between items-center border-b border-slate-850 pb-3 mb-4">
-                <h3 class="text-sm font-bold text-white">AI Optical Neural Network Frame</h3>
-                <span class="text-xs font-bold bg-indigo-500/10 text-indigo-400 px-2.5 py-0.5 rounded border border-indigo-500/20 uppercase tracking-widest">
-                  Node Active
-                </span>
+            <form onsubmit="submitCollectorBatch(event)" class="flex flex-col gap-4">
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] font-bold text-slate-400 uppercase">Collector Name</label>
+                <input type="text" id="col-input-name" class="bg-slate-950 border border-slate-850 px-4 py-2.5 rounded-xl text-xs text-white focus:outline-none focus:border-emerald-500/50" required>
               </div>
 
-              <div class="h-64 bg-slate-950 rounded-xl border border-slate-900 relative overflow-hidden flex items-center justify-center">
-                <div class="absolute inset-0 bg-gradient-to-br from-emerald-500/[0.03] to-transparent"></div>
-                
-                <div id="ai-scan-standby-view" class="flex flex-col items-center gap-3 text-center">
-                  <span class="text-4xl text-slate-700">📷</span>
-                  <p class="text-xs text-slate-400 font-medium">Camera Classifier Standby</p>
-                  <p class="text-[10px] text-slate-600 max-w-xs leading-relaxed">Choose a material preset pile on the left panel to execute automatic computer-vision density analysis.</p>
-                </div>
-
-                <div id="ai-scan-active-view" class="hidden flex flex-col items-center gap-3 relative z-10 animate-pulse text-center p-6">
-                  <span class="text-3xl animate-bounce">🤖</span>
-                  <p class="text-xs font-bold text-emerald-400">Running AI Polymer Classification checks...</p>
-                  <p class="text-[10px] text-slate-500 font-mono mt-1">Estimating target contamination density matrix</p>
-                  <div class="w-32 bg-slate-900 h-1.5 rounded-full overflow-hidden border border-slate-800 mt-2">
-                    <div class="bg-emerald-500 h-full w-[70%] rounded-full animate-progress"></div>
-                  </div>
-                </div>
-
-                <div id="scan-laser-line" class="hidden absolute left-0 w-full h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent animate-scan z-20"></div>
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] font-bold text-slate-400 uppercase">Material Weight (KG)</label>
+                <input type="number" id="col-input-weight" step="0.1" placeholder="0.00" class="bg-slate-950 border border-slate-850 px-4 py-3 rounded-xl text-sm font-bold focus:outline-none text-white w-full" required>
               </div>
 
-              <div class="grid grid-cols-3 gap-3 text-center mt-4">
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-900">
-                  <p class="text-[9px] text-slate-500 uppercase font-bold">Identified Type</p>
-                  <p id="ai-detected-type" class="text-xs font-bold text-slate-200 mt-0.5">PET Plastics</p>
+              <div class="bg-slate-950 border border-slate-850 p-4 rounded-xl flex justify-between items-center mt-2">
+                <div>
+                  <p class="text-[10px] uppercase font-bold text-slate-500">Estimated Payout</p>
+                  <p class="text-[10px] text-slate-400 mt-0.5">Paid instantly</p>
                 </div>
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-900">
-                  <p class="text-[9px] text-slate-500 uppercase font-bold">Purity Rating</p>
-                  <p id="ai-detected-purity" class="text-xs font-bold text-emerald-400 mt-0.5">97.8%</p>
-                </div>
-                <div class="bg-slate-950 p-3 rounded-xl border border-slate-900">
-                  <p class="text-[9px] text-slate-500 uppercase font-bold">Contamination</p>
-                  <p id="ai-detected-contaminants" class="text-xs font-bold text-amber-500 mt-0.5">2.2%</p>
-                </div>
+                <p id="col-estimated-payout" class="text-xl font-black text-emerald-400 font-mono">₹0</p>
               </div>
-            </div>
 
-          </div>
-        </section>
-
-        <section id="tab-consensus" class="tab-pane hidden flex flex-col gap-6">
-          <div class="bg-slate-900 border border-slate-800 p-6 rounded-3xl">
-            <div class="flex justify-between items-center border-b border-slate-850 pb-4 mb-6">
-              <div>
-                <h3 class="text-lg font-bold text-white">Byzantine Fault Tolerance (BFT) Network</h3>
-                <p class="text-xs text-slate-400 mt-0.5">Real-time voting and block proposal lifecycle visualizer across Mumbai zone validation nodes.</p>
-              </div>
-              <span class="text-xs text-slate-400 font-mono">Consensus Stage: <span id="consensus-status-badge" class="font-bold text-emerald-400">Idle</span></span>
-            </div>
-
-            <div id="consensus-nodes-grid" class="grid grid-cols-1 md:grid-cols-4 gap-4"></div>
-
-            <div class="bg-slate-950 p-4 rounded-xl border border-slate-900 mt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-              <div>
-                <p class="text-xs font-bold text-slate-300">Simulate Network Stress Test</p>
-                <p class="text-xs text-slate-500 mt-0.5">Manually invoke full round-trip block proposals across regional validation targets.</p>
-              </div>
-              <button onclick="runBFTConsensusSimulation('Manual network stress test proposed.', null)" class="bg-indigo-500 hover:bg-indigo-400 text-white font-black text-xs uppercase tracking-widest px-6 py-3 rounded-xl transition duration-150">
-                Run Network Validation Proposal
+              <button type="submit" class="w-full bg-emerald-500 text-slate-950 font-black text-xs uppercase tracking-widest py-3.5 rounded-xl transition-all hover:bg-emerald-400">
+                Submit Collection
               </button>
-            </div>
-          </div>
-
-          <div class="bg-slate-900 border border-slate-800 rounded-2xl p-6 font-mono text-xs text-slate-300">
-            <div class="flex justify-between items-center border-b border-slate-850 pb-3 mb-4">
-              <h3 class="text-sm font-bold text-white font-sans">Command Line Operational CLI Terminal</h3>
-              <span class="text-[10px] text-slate-500">eco-admin@ledger-node</span>
-            </div>
-
-            <div id="cli-console-pane" class="bg-slate-950 p-4 rounded-xl border border-slate-900 h-48 overflow-y-auto mb-4 flex flex-col gap-1.5 font-mono text-[11px] leading-relaxed custom-scrollbar"></div>
-
-            <form onsubmit="handleCLICommandSubmit(event)" class="flex gap-2">
-              <span class="text-slate-500 text-sm flex items-center">&gt;</span>
-              <input type="text" id="cli-input" placeholder="Type system directive (e.g. /help, /seed, /consolidate, /fast-payout)..." class="bg-slate-950 border border-slate-850 rounded-xl px-4 py-3 text-xs text-white flex-1 focus:outline-none focus:border-indigo-500 font-mono">
-              <button type="submit" class="bg-slate-850 hover:bg-slate-800 border border-slate-800 rounded-xl px-5 text-xs font-bold text-white font-sans">Enter</button>
             </form>
           </div>
         </section>
@@ -881,7 +572,6 @@
 
   <script type="text/javascript">
     
-    // Stable Global State Registry object store tracking parameters safely
     const Store = {
       state: {
         isLoggedIn: false,
@@ -892,578 +582,364 @@
         collections: [],
         containers: [],
         ledger: [
-          { block: 10001, action: "GENESIS MINT", details: "EcoLedger Trust Protocol activated. Ready for real-time validation streams.", party: "System Core", hash: "0x0000000000000000e73e921d22", parentHash: "0x000000000000000000000000000000", timestamp: "2026-05-29 07:25:26", gasUsed: "0.00 Gwei" }
+          { block: 10001, action: "GENESIS MINT", details: "EcoLedger Trust Protocol activated. Ready for real-time validation streams.", party: "System Core", hash: "0x0000000000000000e73e921d22" }
         ],
         liveAutoFeed: true,
         scaleConnected: true,
-        scaleWeight: 24.50,
-        scaleCalibration: 1.000,
-        scaleDrift: 0.02,
-        aiScanning: false,
-        aiMaterialDetected: 'PET Plastics',
-        aiPurityPercentage: 97.8,
-        aiContaminantLevel: 2.2,
-        consensusStage: 'Idle',
-        activeCertificate: null,
-        collectorWallet: { address: "0xCollector88eF2090FbaA29d99723049F7b21C0", balanceINR: 2400.00, escrowINR: 450.00, upi: "rajusort@okhdfcmumbai", gasMode: "Standard" },
-        compliance: { company: "Tata Beverage Corporation", gstin: "27AAAAA1111A1Z1" },
-        cliLogs: [
-          "EcoLedger Unified Network CLI loaded.",
-          "Ready for systems administrative directives. Type '/help' for options."
-        ],
-        chatLogs: [
-          { sender: 'ai', text: 'EcoLedger AI Compliance Oracle active. Ask any question regarding ESG target optimization or EPR compliance parameters.' }
-        ],
         throughputHistory: [45, 52, 49, 58, 62, 59, 64]
       }
     };
 
-    let currentSlideIndex = 0;
-    let voiceSynthesizingInstance = false;
-    let voiceListeningInstance = false;
-    let waveAnimationFrame = null;
-    let playbookStepIndex = 0;
-    let playbookActiveInstance = false;
-    let selectedBatches = [];
-    let colType = "PET Plastics";
-    let colQuality = "A-Grade";
-    let networkCongestion = 38;
-
     const SECTORS = ["Sector 3, Dharavi", "Sector 7, Kurla Hub", "Sion Scrap Loop", "Mahim Recycling Circle"];
+    const MATERIALS = ["PET Plastics", "Corrugated Cardboard", "HDPE Drums", "Copper Cables"];
     const SPOT_PRICES = { "PET Plastics": 42, "Corrugated Cardboard": 14, "HDPE Drums": 58, "Copper Cables": 640 };
-
-    const INITIAL_HOUSEHOLDS = [
-      { id: "HH-901", name: "Ananya Deshmukh", sector: "Sector 3, Dharavi", type: "PET Plastics", estWeight: 8.5, status: "Pending Pickup" },
-      { id: "HH-902", name: "Arjun Mehta", sector: "Sector 7, Kurla Hub", type: "Corrugated Cardboard", estWeight: 14.2, status: "Pending Pickup" }
-    ];
 
     function formatINR(number) {
       return new Intl.NumberFormat('en-IN', { style: 'currency', currency: 'INR', maximumFractionDigits: 0 }).format(number);
     }
 
     function addNotification(text, type = 'info') {
-      Store.state.cliLogs.push(`[Notification]: ${text}`);
       const toastContainer = document.getElementById('toast-container');
-      const toastId = `toast-${Date.now()}`;
       const toast = document.createElement('div');
-      toast.id = toastId;
       toast.className = `p-4 rounded-xl border shadow-xl flex items-start gap-3 backdrop-blur-md transform animate-slideUp transition-all duration-300`;
       
       if (type === 'success') {
         toast.className += ' bg-emerald-950/90 border-emerald-500/30 text-emerald-300';
-        toast.innerHTML = `<span class="mt-0.5">🛡️</span><div class="flex-1 text-xs font-semibold leading-relaxed">${text}</div>`;
+        toast.innerHTML = `<span class="mt-0.5">✅</span><div class="flex-1 text-xs font-semibold leading-relaxed">${text}</div>`;
       } else if (type === 'warning') {
         toast.className += ' bg-amber-950/90 border-amber-500/30 text-amber-300';
         toast.innerHTML = `<span class="mt-0.5">⚠️</span><div class="flex-1 text-xs font-semibold leading-relaxed">${text}</div>`;
+      } else if (type === 'error') {
+        toast.className += ' bg-red-950/90 border-red-500/30 text-red-300';
+        toast.innerHTML = `<span class="mt-0.5">❌</span><div class="flex-1 text-xs font-semibold leading-relaxed">${text}</div>`;
       } else {
         toast.className += ' bg-slate-900/95 border-slate-700/50 text-slate-200';
         toast.innerHTML = `<span class="mt-0.5">⚡</span><div class="flex-1 text-xs font-semibold leading-relaxed">${text}</div>`;
       }
       toastContainer.appendChild(toast);
-      if (type === 'success') playHarmonicChime();
       setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 4000);
     }
 
-    function playHarmonicChime() {
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        if (!AudioContext) return;
-        const audioCtx = new AudioContext();
-        const now = audioCtx.currentTime;
-        const osc1 = audioCtx.createOscillator();
-        const osc2 = audioCtx.createOscillator();
-        const gainNode = audioCtx.createGain();
-        osc1.connect(gainNode); osc2.connect(gainNode); gainNode.connect(audioCtx.destination);
-        osc1.frequency.setValueAtTime(392, now); osc2.frequency.setValueAtTime(523.25, now);
-        osc1.type = 'sine'; osc2.type = 'sine';
-        gainNode.gain.setValueAtTime(0, now);
-        gainNode.gain.linearRampToValueAtTime(0.1, now + 0.05);
-        gainNode.gain.exponentialRampToValueAtTime(0.001, now + 0.8);
-        osc1.start(now); osc2.start(now); osc1.stop(now + 0.9); osc2.stop(now + 0.9);
-      } catch (err) { console.warn(err); }
+    function setAuthMode(mode) {
+      const formLogin = document.getElementById('form-login');
+      const formRegister = document.getElementById('form-register');
+      const btnLogin = document.getElementById('btn-mode-login');
+      const btnRegister = document.getElementById('btn-mode-register');
+
+      if (mode === 'login') {
+        formLogin.classList.remove('hidden');
+        formRegister.classList.add('hidden');
+        btnLogin.classList.add('bg-slate-900');
+        btnLogin.classList.remove('text-slate-400');
+        btnRegister.classList.remove('bg-slate-900');
+        btnRegister.classList.add('text-slate-400');
+      } else {
+        formLogin.classList.add('hidden');
+        formRegister.classList.remove('hidden');
+        btnLogin.classList.remove('bg-slate-900');
+        btnLogin.classList.add('text-slate-400');
+        btnRegister.classList.add('bg-slate-900');
+        btnRegister.classList.remove('text-slate-400');
+      }
     }
 
-    const activeTimeouts = {
-      current: [],
-      push: function(id) { this.current.push(id); },
-      clear: function() { this.current.forEach(id => clearTimeout(id)); this.current = []; }
-    };
+    function selectLoginPreset(role, name, address) {
+      document.getElementById('login-address').value = address;
+      document.querySelectorAll('.preset-btn').forEach(btn => {
+        btn.classList.remove('bg-emerald-500/20', 'border-emerald-500/50', 'text-emerald-400');
+        btn.classList.add('bg-slate-950', 'border-slate-850', 'text-slate-300');
+      });
+      event.target.closest('button').classList.add('bg-emerald-500/20', 'border-emerald-500/50', 'text-emerald-400');
+      addNotification(`Selected: ${name} (${role})`, 'info');
+    }
 
-    function safeTimeout(fn, delay) {
-      const id = setTimeout(fn, delay);
-      activeTimeouts.push(id);
-      return id;
+    function triggerBiometricVerification() {
+      document.getElementById('biometric-status').textContent = '✓ Biometric Scan Complete';
+      addNotification('Biometric verification successful!', 'success');
+    }
+
+    function handleAuthLogin(event) {
+      event.preventDefault();
+      
+      const address = document.getElementById('login-address').value;
+      if (!address || !address.startsWith('0x')) {
+        addNotification('Please select a valid wallet address', 'error');
+        return;
+      }
+
+      Store.state.isLoggedIn = true;
+      Store.state.user.address = address;
+      
+      syncStateUI();
+      addNotification(`Logged in as ${Store.state.user.name}`, 'success');
+    }
+
+    function handleAuthRegister(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('register-name').value;
+      if (!name) {
+        addNotification('Please enter a node name', 'error');
+        return;
+      }
+
+      Store.state.isLoggedIn = true;
+      Store.state.user.name = name;
+      
+      syncStateUI();
+      addNotification(`Node registered: ${name}`, 'success');
+    }
+
+    function generateKeysForRegistration() {
+      const pubAddr = '0x' + Math.random().toString(16).substring(2, 42);
+      const mnemonic = 'abandon ability able about above absolute abuse access accident account accuse achieve acid acidify acoustics acme acre across act action actor actions acts actual acuity acumen acute acutely acuteness ad adapt adapters adding addition additional adds ado adore adorned adorn adults advance advanced advantage adventure adverse adverb advertise advice advise advocate advising advocating aegis aeon aerate aerials aerobic aeronautic aeroplane aeros aerospace aerosol aerosols aery afar affair affable affair affably affair affectation affectations affectedly affection affectionate affectioned affectioning affections affectious affectiously affectiveness affectuously affectuous affecter affectingly affective affectively affectivity affeir affekction affend affeoffed affeoffee affeoffees affeoffing affeoffs afferable afference afferency afferent afferes afferested afferent affered affetammente affetti affetto';
+      
+      document.getElementById('register-pub-addr').textContent = pubAddr;
+      document.getElementById('register-mnemonic').textContent = mnemonic;
+      document.getElementById('register-key-details').classList.remove('hidden');
+      
+      addNotification('Keys generated successfully', 'success');
+    }
+
+    function adjustRegisterInputs() {
+      const role = document.getElementById('register-role').value;
+      const gstinField = document.getElementById('register-field-gstin');
+      const wardField = document.getElementById('register-field-ward');
+
+      if (role === 'Auditor' || role === 'Aggregator') {
+        gstinField.classList.remove('hidden');
+        wardField.classList.add('hidden');
+      } else if (role === 'Collector') {
+        gstinField.classList.add('hidden');
+        wardField.classList.remove('hidden');
+      } else {
+        gstinField.classList.add('hidden');
+        wardField.classList.add('hidden');
+      }
     }
 
     function syncStateUI() {
       if (Store.state.isLoggedIn) {
         document.getElementById('auth-portal').classList.add('hidden');
         document.getElementById('dashboard').classList.remove('hidden');
+        document.getElementById('session-address').textContent = Store.state.user.address;
+        document.getElementById('role-tag').textContent = `${Store.state.user.role} Connected`;
+        
+        initializeDashboard();
       } else {
         document.getElementById('auth-portal').classList.remove('hidden');
         document.getElementById('dashboard').classList.add('hidden');
-        return;
-      }
-
-      const rawSum = Store.state.collections.reduce((acc, curr) => acc + (parseFloat(curr.weight) || 0), 0);
-      const containerSum = Store.state.containers.filter(c => c.status === 'Sold').reduce((acc, curr) => acc + (parseFloat(curr.weight) || 0), 0);
-      const totalDiverted = (rawSum + containerSum).toFixed(1);
-      const computedCredits = (parseFloat(totalDiverted) * 0.75).toFixed(1);
-
-      document.getElementById('kpi-diverted').innerText = `${totalDiverted} kg`;
-      document.getElementById('kpi-credits').innerText = `${computedCredits} CO₂-U`;
-      document.getElementById('kpi-blocks').innerText = `#${Store.state.ledger.length + 10000}`;
-      document.getElementById('role-tag').innerText = `${Store.state.user.role} Connected`;
-      document.getElementById('session-address').innerText = Store.state.user.address;
-
-      document.querySelectorAll('.tab-pane').forEach(tab => tab.classList.add('hidden'));
-      document.getElementById(`tab-${Store.state.activeTab}`).classList.remove('hidden');
-
-      document.querySelectorAll('.nav-link').forEach(nav => {
-        nav.className = 'nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all text-slate-400 hover:text-white hover:bg-slate-900/50';
-      });
-      const activeNav = document.getElementById(`nav-${Store.state.activeTab}`);
-      if (activeNav) activeNav.className = 'nav-link flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition-all bg-gradient-to-r from-emerald-500/20 to-teal-500/10 text-white border-l-4 border-emerald-500 font-extrabold';
-
-      if (Store.state.activeTab === 'household') renderHouseholdTab();
-      if (Store.state.activeTab === 'collector') renderCollectorTab();
-      if (Store.state.activeTab === 'aggregator') renderAggregatorTab();
-      if (Store.state.activeTab === 'recycler') renderRecyclerTab();
-      if (Store.state.activeTab === 'ledger') renderLedgerTab();
-      if (Store.state.activeTab === 'wallet') renderWalletTab();
-      if (Store.state.activeTab === 'ai-classifier') renderAIClassifierTab();
-      if (Store.state.activeTab === 'consensus') renderConsensusTab();
-      if (Store.state.activeTab === 'playbook') renderPlaybookTab();
-    }
-
-    function switchTab(tabId) {
-      Store.state.activeTab = tabId;
-      syncStateUI();
-    }
-
-    function setAuthMode(mode) {
-      const loginBtn = document.getElementById('btn-mode-login');
-      const registerBtn = document.getElementById('btn-mode-register');
-      const loginForm = document.getElementById('form-login');
-      const registerForm = document.getElementById('form-register');
-      if (mode === 'login') {
-        loginBtn.className = 'flex-1 py-2.5 text-xs font-bold bg-slate-900 text-white rounded-lg transition-all flex items-center justify-center gap-1.5';
-        registerBtn.className = 'flex-1 py-2.5 text-xs font-bold text-slate-400 hover:text-white rounded-lg transition-all flex items-center justify-center gap-1.5';
-        loginForm.classList.remove('hidden'); registerForm.classList.add('hidden');
-      } else {
-        registerBtn.className = 'flex-1 py-2.5 text-xs font-bold bg-slate-900 text-white rounded-lg transition-all flex items-center justify-center gap-1.5';
-        loginBtn.className = 'flex-1 py-2.5 text-xs font-bold text-slate-400 hover:text-white rounded-lg transition-all flex items-center justify-center gap-1.5';
-        registerForm.classList.remove('hidden'); loginForm.classList.add('hidden');
       }
     }
 
-    function selectLoginPreset(role, name, address) {
-      document.querySelectorAll('.preset-btn').forEach(btn => {
-        btn.className = 'preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-slate-950 border-slate-800 text-slate-400 hover:border-slate-700 hover:text-slate-200';
-      });
-      event.currentTarget.className = 'preset-btn p-3 rounded-xl border text-xs font-bold text-left transition-all bg-emerald-500/10 border-emerald-500 text-emerald-400 font-extrabold';
-      document.getElementById('login-address').value = address;
-      Store.state.user.role = role; Store.state.user.name = name; Store.state.user.address = address;
-    }
+    function initializeDashboard() {
+      // Populate selects
+      const sectorSelect = document.getElementById('hh-input-sector');
+      const typeSelect = document.getElementById('hh-input-type');
+      
+      if (sectorSelect) {
+        sectorSelect.innerHTML = SECTORS.map(s => `<option value="${s}">${s}</option>`).join('');
+      }
+      
+      if (typeSelect) {
+        typeSelect.innerHTML = MATERIALS.map(m => `<option value="${m}">${m}</option>`).join('');
+      }
 
-    function adjustRegisterInputs() {
-      const role = document.getElementById('register-role').value;
-      document.getElementById('register-field-gstin').classList.toggle('hidden', role !== 'Auditor');
-      document.getElementById('register-field-ward').classList.toggle('hidden', role !== 'Collector');
-    }
-
-    function generateKeysForRegistration() {
-      const entropyHash = generateHash();
-      const wordList = ["circular", "trust", "provenance", "ledger", "mumbai", "scale", "sensor", "audit", "compliance", "token", "carbon", "green"];
-      const shuffled = [...wordList].sort(() => 0.5 - Math.random());
-      document.getElementById('register-key-details').classList.remove('hidden');
-      document.getElementById('register-pub-addr').innerText = entropyHash;
-      document.getElementById('register-mnemonic').innerText = shuffled.join(" ");
-      document.getElementById('register-name').dataset.generatedAddr = entropyHash;
-      addNotification("Cryptographic keypair generation successful!", "success");
-    }
-
-    function triggerBiometricVerification() {
-      document.getElementById('biometric-status').innerText = "Evaluating biometric vector hashes...";
-      document.getElementById('biometric-trigger').className = "w-16 h-16 rounded-full flex items-center justify-center transition-all bg-amber-500/20 text-amber-400 animate-pulse border-2 border-amber-500";
-      addNotification("Accessing biometric scanner payload...", "info");
-      setTimeout(() => {
-        document.getElementById('biometric-status').innerText = "Biometric lock verified successfully.";
-        document.getElementById('biometric-trigger').className = "w-16 h-16 rounded-full flex items-center justify-center transition-all bg-emerald-500 text-slate-950 shadow-[0_0_15px_rgba(16,185,129,0.4)]";
-        addNotification("Biometric verification verified securely.", "success");
-      }, 1500);
-    }
-
-    function handleAuthLogin(e) {
-      e.preventDefault();
-      const address = document.getElementById('login-address').value;
-      if (!address) { addNotification("Please select or enter key credentials.", "warning"); return; }
-      Store.state.user.address = address; Store.state.isLoggedIn = true;
+      // Initialize ledger
+      renderLedger();
+      
+      // Load initial data
       Store.state.households = [
-        { id: "HH-101", name: "Anil Ambani", sector: "Sector 3, Dharavi", type: "PET Plastics", estWeight: 14.5, status: "Pending Pickup" },
-        { id: "HH-102", name: "Meera Nair", sector: "Sion Scrap Loop", type: "Copper Cables", estWeight: 8.2, status: "Pending Pickup" }
+        { id: "HH-901", name: "Ananya Deshmukh", sector: "Sector 3, Dharavi", type: "PET Plastics", estWeight: 8.5, status: "Pending" },
+        { id: "HH-902", name: "Arjun Mehta", sector: "Sector 7, Kurla Hub", type: "Corrugated Cardboard", estWeight: 14.2, status: "Pending" }
       ];
-      Store.state.collections = [
-        { id: "BATCH-801", collector: "Kamla Devi", type: "PET Plastics", weight: 45.2, source: "HH-Pre", quality: "A-Grade", status: "In-Transit", timestamp: "Active Now", hash: "0x8fae301" }
-      ];
-      Store.state.containers = [
-        { id: "CONT-901", material: "HDPE Drums (Processed Flakes)", weight: 350.0, grade: "Grade AAA Clean", aggregator: "Dharavi Sorters Assoc.", origin: "Dharavi Hub A", price: 20300, status: "Available", hash: generateHash() }
-      ];
-      addNotification(`Identity Session Sync complete: ${Store.state.user.name} logged in.`, "success");
-      syncStateUI();
+      
+      renderHouseholdPool();
+      switchTab('playbook');
     }
 
-    function handleAuthRegister(e) {
-      e.preventDefault();
-      const name = document.getElementById('register-name').value;
-      const role = document.getElementById('register-role').value;
-      const address = document.getElementById('register-name').dataset.generatedAddr;
-      if (!address || !name) { addNotification("Key generation required to register Node.", "warning"); return; }
-      Store.state.user.name = name; Store.state.user.role = role; Store.state.user.address = address;
-      addNotification("Registration complete! Please log in.", "success");
-      setAuthMode('login');
-      document.getElementById('login-address').value = address;
-    }
-
-    function renderHouseholdTab() {
-      document.getElementById('hh-input-sector').innerHTML = SECTORS.map(s => `<option value="${s}">${s}</option>`).join('');
-      document.getElementById('hh-input-type').innerHTML = Object.keys(SPOT_PRICES).map(p => `<option value="${p}">${p}</option>`).join('');
-      const poolList = document.getElementById('household-demand-pool');
-      if (Store.state.households.length === 0) {
-        poolList.innerHTML = `<p class="text-xs text-slate-500 text-center py-4">No active drops registered on public stream.</p>`;
-      } else {
-        poolList.innerHTML = Store.state.households.map(hh => `
-          <div class="bg-slate-950 p-3 rounded-xl border border-slate-900 flex justify-between items-center text-xs animate-slideUp">
-            <div><p class="font-bold text-white">${hh.name} <span class="text-[10px] text-slate-500 font-mono">(${hh.id})</span></p>
-            <p class="text-[10px] text-slate-400 mt-0.5">${hh.type} • {hh.sector}</p></div>
-            <div class="text-right"><span class="px-2.5 py-0.5 rounded-full text-[9px] font-bold ${hh.status === 'Collected' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-amber-500/10 text-amber-400'}">${hh.status}</span>
-            <p class="text-[10px] text-slate-500 font-black mt-1 font-mono">${hh.estWeight} kg</p></div>
+    function renderLedger() {
+      const ledgerList = document.getElementById('ledger-blocks-list');
+      if (!ledgerList) return;
+      
+      ledgerList.innerHTML = Store.state.ledger.map(block => `
+        <div class="bg-slate-950 p-4 rounded-xl border border-slate-850 text-[10px]">
+          <div class="flex justify-between items-center mb-2">
+            <span class="font-bold text-emerald-400">Block #${block.block}</span>
+            <span class="text-slate-500">${block.hash.substring(0, 12)}...</span>
           </div>
-        `).join('');
-      }
+          <p class="text-slate-300 mb-1"><strong>Action:</strong> ${block.action}</p>
+          <p class="text-slate-400"><strong>Details:</strong> ${block.details}</p>
+          <p class="text-slate-500 mt-1"><strong>Party:</strong> ${block.party}</p>
+        </div>
+      `).join('');
+      
+      document.getElementById('kpi-blocks').textContent = `#${Store.state.ledger.length}`;
     }
 
-    function submitCitizenDropoff(e) {
-      e.preventDefault();
+    function renderHouseholdPool() {
+      const pool = document.getElementById('household-demand-pool');
+      if (!pool) return;
+      
+      pool.innerHTML = Store.state.households.map(hh => `
+        <div class="p-3 rounded-lg bg-slate-950 border border-slate-850 text-[11px]">
+          <div class="flex justify-between items-center mb-1">
+            <span class="font-bold text-emerald-400">${hh.name}</span>
+            <span class="text-slate-500">${hh.estWeight} kg</span>
+          </div>
+          <p class="text-slate-400">${hh.sector} • ${hh.type}</p>
+          <p class="text-slate-500 text-[10px] mt-1">${hh.status}</p>
+        </div>
+      `).join('');
+    }
+
+    function submitCitizenDropoff(event) {
+      event.preventDefault();
+      
       const name = document.getElementById('hh-input-name').value;
       const sector = document.getElementById('hh-input-sector').value;
       const type = document.getElementById('hh-input-type').value;
       const weight = parseFloat(document.getElementById('hh-input-weight').value);
-      if (isNaN(weight) || weight <= 0) { addNotification("Invalid weight parameter.", "warning"); return; }
-      const newHhId = `HH-${Math.floor(1000 + Math.random() * 9000)}`;
-      Store.state.households.unshift({ id: newHhId, name, sector, type, estWeight: weight, status: "Pending Pickup" });
-      document.getElementById('hh-input-name').value = ''; document.getElementById('hh-input-weight').value = '';
-      const prevBlock = Store.state.ledger[Store.state.ledger.length - 1];
-      const blockNum = prevBlock.block + 1;
-      const details = `Citizen ${name} registered ${weight}kg ${type} pickup target within ${sector}.`;
-      const newHash = simulateSHA256(blockNum, prevBlock.hash, details, new Date().toISOString());
-      runBFTConsensusSimulation(details, () => {
-        Store.state.ledger.push({ block: blockNum, action: "DEMAND BROADCASTED", details, party: "Household Sourcing Gateway", hash: newHash, parentHash: prevBlock.hash, timestamp: new Date().toISOString().replace('T', ' ').substr(0, 19), gasUsed: "2.12 Gwei" });
-        addNotification(`Consensus verified block #${blockNum} demand listed.`, "success");
-        renderHouseholdTab();
-      });
-    }
 
-    function renderCollectorTab() {
-      const dict = DICTIONARY[Store.state.lang] || DICTIONARY['en'];
-      document.getElementById('dict-title').innerText = dict.collectorPortal;
-      document.getElementById('dict-sub').innerText = dict.subText;
-      document.getElementById('dict-voice-title').innerText = dict.voiceWidgetTitle;
-      document.getElementById('dict-voice-status').innerText = voiceListeningInstance ? dict.listening : dict.micTapToSpeak;
-      document.getElementById('dict-sim-btn').innerText = dict.fallbackVoiceBtn;
-      document.getElementById('dict-col-name').innerText = dict.collectorName;
-      document.getElementById('dict-origin').innerText = dict.originSelect;
-      document.getElementById('dict-quality').innerText = dict.qualitySelect;
-      document.getElementById('dict-material').innerText = dict.materialSelect;
-      document.getElementById('dict-weight').innerText = dict.weightInput;
-      document.getElementById('dict-est-payout').innerText = dict.estimatedPayout;
-      document.getElementById('dict-payout-label').innerText = dict.payoutLabel;
-      document.getElementById('dict-submit').innerText = dict.submitButton;
+      if (!name || !weight || weight <= 0) {
+        addNotification('Please fill all fields with valid values', 'error');
+        return;
+      }
 
-      const pendingHh = Store.state.households.filter(h => h.status === 'Pending Pickup');
-      document.getElementById('col-input-source').innerHTML = pendingHh.map(hh => `<option value="${hh.id}">${hh.id} (${hh.name})</option>`).join('') + `<option value="Street Sourcing">Street Sourcing</option>`;
+      const household = {
+        id: `HH-${Date.now()}`,
+        name: name,
+        sector: sector,
+        type: type,
+        estWeight: weight,
+        status: 'Submitted'
+      };
 
-      document.getElementById('col-material-matrix').innerHTML = Object.keys(SPOT_PRICES).map(mat => `
-        <button type="button" onclick="selectCollectorMaterial('${mat}')" class="py-2 px-3 rounded-xl border text-[11px] font-bold text-center transition-all ${colType === mat ? 'bg-emerald-500/10 border-emerald-500 text-emerald-400 font-extrabold' : 'bg-slate-950 border-slate-850 text-slate-400'}">${mat}</button>
-      `).join('');
-      syncCollectorPayout();
-    }
-
-    function selectCollectorMaterial(mat) { colType = mat; renderCollectorTab(); }
-    function syncCollectorFormWithSource() {
-      const srcId = document.getElementById('col-input-source').value;
-      const matchedHh = Store.state.households.find(h => h.id === srcId);
-      if (matchedHh) { colType = matchedHh.type; document.getElementById('col-input-weight').value = matchedHh.estWeight; renderCollectorTab(); }
-    }
-    function syncCollectorPayout() {
-      const weight = parseFloat(document.getElementById('col-input-weight').value) || 0;
-      document.getElementById('col-estimated-payout').innerText = formatINR(weight * (SPOT_PRICES[colType] || 25));
-    }
-    document.addEventListener('input', (e) => { if (e.target && e.target.id === 'col-input-weight') syncCollectorPayout(); });
-
-    function submitCollectorBatch(e) {
-      e.preventDefault();
-      const cName = document.getElementById('col-input-name').value;
-      const cSource = document.getElementById('col-input-source').value;
-      const cQuality = document.getElementById('col-input-quality').value;
-      const cWeight = parseFloat(document.getElementById('col-input-weight').value);
-      if (isNaN(cWeight) || cWeight <= 0) { addNotification("Invalid dimensions.", "warning"); return; }
+      Store.state.households.push(household);
+      renderHouseholdPool();
       
-      const newBatchId = `BATCH-${Math.floor(1000 + Math.random() * 9000)}`;
-      const payout = cWeight * (SPOT_PRICES[colType] || 25);
-      Store.state.collections.unshift({ id: newBatchId, collector: cName, type: colType, weight: cWeight, source: cSource, quality: cQuality, status: "In-Transit", timestamp: "Just Now", hash: generateHash().substr(0,10) });
-      Store.state.households = Store.state.households.map(h => h.id === cSource ? { ...h, status: "Collected" } : h);
-      Store.state.collectorWallet.balanceINR += payout;
-
-      const prevBlock = Store.state.ledger[Store.state.ledger.length - 1];
-      const blockNum = prevBlock.block + 1;
-      const details = `Collector verified ${cWeight}kg ${colType} from source ${cSource}.`;
-      const newHash = simulateSHA256(blockNum, prevBlock.hash, details, new Date().toISOString());
-      runBFTConsensusSimulation(details, () => {
-        Store.state.ledger.push({ block: blockNum, action: "BATCH VERIFIED", details, party: "Collector Node", hash: newHash, parentHash: prevBlock.hash, timestamp: new Date().toISOString().replace('T',' ').substr(0,19), gasUsed: "3.41 Gwei" });
-        Store.state.throughputHistory.shift(); Store.state.throughputHistory.push(Math.floor(45 + Math.random()*20));
-        addNotification(`Collection locked securely to block #${blockNum}`, "success");
-        renderCollectorTab();
-      });
+      event.target.reset();
+      addNotification(`Dropoff scheduled: ${weight}kg of ${type}`, 'success');
     }
 
-    function renderAggregatorTab() {
-      const pending = Store.state.collections.filter(c => c.status === 'In-Transit');
-      const tableBody = document.getElementById('aggregator-batches-body');
-      if (pending.length === 0) {
-        tableBody.innerHTML = `<tr><td colspan='7' class='py-8 text-center text-xs text-slate-500'>No active batches in processing loops.</td></tr>`;
-      } else {
-        tableBody.innerHTML = pending.map(item => `
-          <tr class="hover:bg-slate-850/50 text-slate-300">
-            <td class="py-3.5 px-2"><input type="checkbox" onchange="toggleBatchSelection('${item.id}')" ${selectedBatches.includes(item.id) ? 'checked' : ''} class="w-4 h-4 bg-slate-950 border-slate-800 text-indigo-500 rounded"></td>
-            <td class="py-3.5 px-2 font-mono font-bold">${item.id}</td>
-            <td class="py-3.5 px-2">${item.collector}</td>
-            <td class="py-3.5 px-2">${item.type}</td>
-            <td class="py-3.5 px-2 font-mono">${item.source}</td>
-            <td class="py-3.5 px-2 font-bold text-right">${item.weight} kg</td>
-            <td class="py-3.5 px-2"><span class="px-2 py-0.5 rounded-full text-[10px] bg-amber-500/10 text-amber-400 border border-amber-500/20">${item.status}</span></td>
-          </tr>
-        `).join('');
-      }
-      document.getElementById('consolidate-btn').classList.toggle('hidden', selectedBatches.length === 0);
-    }
-
-    function toggleBatchSelection(id) {
-      selectedBatches = selectedBatches.includes(id) ? selectedBatches.filter(b => b !== id) : [...selectedBatches, id];
-      renderAggregatorTab();
-    }
-
-    function executeAggregatorConsolidation() {
-      if (selectedBatches.length === 0) return;
-      const matched = Store.state.collections.filter(c => selectedBatches.includes(c.id));
-      const totalWeight = matched.reduce((acc, curr) => acc + curr.weight, 0);
-      const materialCategory = matched[0]?.type || "PET Plastics";
-      const newContainerId = `CONT-${Math.floor(1000 + Math.random() * 9000)}`;
+    function submitCollectorBatch(event) {
+      event.preventDefault();
       
-      Store.state.containers.unshift({ id: newContainerId, material: `${materialCategory} (Flakes)`, weight: totalWeight, grade: "Grade AAA Clean", aggregator: "Dharavi Sorters Assoc.", origin: "Dharavi Hub A", price: Math.round(totalWeight*55), status: "Available", hash: generateHash() });
-      Store.state.collections = Store.state.collections.map(c => selectedBatches.includes(c.id) ? { ...c, status: "Consolidated" } : c);
-      selectedBatches = [];
+      const name = document.getElementById('col-input-name').value;
+      const weight = parseFloat(document.getElementById('col-input-weight').value);
 
-      const prevBlock = Store.state.ledger[Store.state.ledger.length - 1];
-      const blockNum = prevBlock.block + 1;
-      const details = `Sealed high-density shipping container ${newContainerId} with ${totalWeight}kg mass.`;
-      const newHash = simulateSHA256(blockNum, prevBlock.hash, details, new Date().toISOString());
-      runBFTConsensusSimulation(details, () => {
-        Store.state.ledger.push({ block: blockNum, action: "CONTAINER MINTED", details, party: "Aggregator Node", hash: newHash, parentHash: prevBlock.hash, timestamp: new Date().toISOString().replace('T',' ').substr(0,19), gasUsed: "12.8 Gwei" });
-        addNotification(`Container ${newContainerId} successfully deployed onto corporate board.`, "success");
-        renderAggregatorTab();
-      });
-    }
+      if (!name || !weight || weight <= 0) {
+        addNotification('Please enter valid data', 'error');
+        return;
+      }
 
-    function renderRecyclerTab() {
-      document.getElementById('compliance-company').value = Store.state.compliance.company;
-      document.getElementById('compliance-gstin').value = Store.state.compliance.gstin;
-      const grid = document.getElementById('containers-market-grid');
+      const payout = weight * 45;
+      document.getElementById('col-estimated-payout').textContent = formatINR(payout);
       
-      if (Store.state.containers.length === 0) {
-        grid.innerHTML = `<p class="text-xs text-slate-500 col-span-2 text-center py-6">No industrial containers listed.</p>`;
-      } else {
-        grid.innerHTML = Store.state.containers.map(cont => `
-          <div class="bg-slate-900 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between gap-4">
-            <div class="flex justify-between items-start">
-              <div><span class="text-[10px] font-mono bg-slate-950 border border-slate-850 text-slate-400 px-2 py-0.5 rounded">${cont.id}</span>
-              <h4 class="text-base font-black text-white mt-2">${cont.material}</h4></div>
-              <p class="text-sm font-black text-emerald-400 font-mono">${formatINR(cont.price)}</p>
-            </div>
-            <button onclick="purchaseComplianceContainer('${cont.id}')" ${cont.status==='Sold'?'disabled':''} class="w-full py-2 bg-emerald-500 text-slate-950 rounded-xl text-xs font-bold transition-all disabled:bg-slate-950 disabled:text-slate-600">${cont.status==='Sold'?'Sold Out':'Acquire Container & Mint EPR'}</button>
-          </div>
-        `).join('');
-      }
-
-      const certPane = document.getElementById('active-certificate-pane');
-      if (Store.state.activeCertificate) {
-        const cert = Store.state.activeCertificate;
-        certPane.classList.remove('hidden');
-        certPane.innerHTML = `
-          <div class="bg-slate-950 border border-emerald-500/30 p-6 rounded-2xl mt-4 flex flex-col gap-2">
-            <h4 class="text-sm font-bold text-emerald-400 uppercase tracking-widest">Verifiable Cert Root: ${cert.id}</h4>
-            <p class="text-xs text-slate-300">Recipient Corporate node: <strong>${cert.recipient}</strong> (${cert.taxId})</p>
-            <p class="text-xs text-slate-400 font-mono text-[10px] bg-slate-900 p-2 rounded mt-2 truncate">Merkle Root: ${cert.merkleRoot}</p>
-            <button onclick="dismissEPRCertificate()" class="mt-2 py-1.5 bg-slate-900 hover:bg-slate-850 rounded-lg text-xs text-slate-400 font-bold border border-slate-800">Dismiss View</button>
-          </div>
-        `;
-      } else { certPane.classList.add('hidden'); }
-    }
-
-    function purchaseComplianceContainer(id) {
-      const target = Store.state.containers.find(c => c.id === id);
-      if (!target) return;
-      const cert = { id: `CERT-${Math.floor(100000+Math.random()*900000)}`, recipient: Store.state.compliance.company, taxId: Store.state.compliance.gstin, material: target.material, weight: target.weight, creditIssued: (target.weight*0.75).toFixed(1), timestamp: new Date().toISOString(), merkleRoot: generateHash("0x_mroot_"), sourceNode: target.aggregator, blockchainBlock: Store.state.ledger[Store.state.ledger.length-1].block+1 };
-      Store.state.containers = Store.state.containers.map(c => c.id === id ? { ...c, status: 'Sold' } : c);
-      Store.state.activeCertificate = cert;
-
-      const prevBlock = Store.state.ledger[Store.state.ledger.length - 1];
-      const blockNum = prevBlock.block + 1;
-      const details = `EPR Compliance Claim settled for ${Store.state.compliance.company}. Retired ${target.weight}kg vector cargo.`;
-      const newHash = simulateSHA256(blockNum, prevBlock.hash, details, new Date().toISOString());
-      runBFTConsensusSimulation(details, () => {
-        Store.state.ledger.push({ block: blockNum, action: "EPR CLAIM RETIRED", details, party: "Corporate Portal", hash: newHash, parentHash: prevBlock.hash, timestamp: new Date().toISOString().replace('T',' ').substr(0,19), gasUsed: "5.12 Gwei" });
-        addNotification(`EPR validation path settled on block #${blockNum}`, "success");
-        renderRecyclerTab();
+      Store.state.collections.push({
+        id: `COL-${Date.now()}`,
+        collector: name,
+        weight: weight,
+        payout: payout,
+        timestamp: new Date().toLocaleString()
       });
-    }
-    function dismissEPRCertificate() { Store.state.activeCertificate = null; renderRecyclerTab(); }
 
-    function renderLedgerTab() {
-      document.getElementById('ledger-blocks-list').innerHTML = [...Store.state.ledger].reverse().map(block => `
-        <div class="bg-slate-950 border border-slate-900 rounded-xl p-4 flex flex-col gap-2 font-mono animate-slideUp">
-          <div class="flex justify-between items-center text-[10px] border-b border-slate-900 pb-1.5">
-            <span class="text-white font-bold">Block #${block.block} [${block.action}]</span>
-            <span class="text-slate-500">${block.timestamp}</span>
-          </div>
-          <p class="text-xs text-slate-300 font-sans leading-relaxed">${block.details}</p>
-          <div class="text-[9px] text-slate-600 truncate pt-1 flex justify-between">
-            <span>SHA Root: ${block.hash}</span>
-            <span>Signatory: ${block.party}</span>
-          </div>
-        </div>
-      `).join('');
+      // Add to ledger
+      Store.state.ledger.push({
+        block: 10001 + Store.state.ledger.length,
+        action: 'COLLECTION_LOGGED',
+        details: `Collected ${weight}kg by ${name}`,
+        party: name,
+        hash: '0x' + Math.random().toString(16).substring(2, 12)
+      });
+
+      renderLedger();
+      event.target.reset();
+      addNotification(`Collection logged: ${weight}kg (Payout: ${formatINR(payout)})`, 'success');
     }
 
-    function renderWalletTab() {
-      document.getElementById('wallet-balance').innerText = formatINR(Store.state.collectorWallet.balanceINR);
-      document.getElementById('wallet-escrow').innerText = formatINR(Store.state.collectorWallet.escrowINR);
-      document.getElementById('gas-stats-p').innerText = `Active gas configuration optimized. Current network traffic congestion status: ${networkCongestion}%.`;
-    }
-    function executeWalletCashout() {
-      if (Store.state.collectorWallet.balanceINR <= 0) { addNotification("Wallet balance clear.", "warning"); return; }
-      addNotification(`INR ${Store.state.collectorWallet.balanceINR.toLocaleString()} successfully cashed out to unified banking bridge.`, "success");
-      Store.state.collectorWallet.balanceINR = 0; renderWalletTab();
-    }
-    function setGasMode(mode) { Store.state.collectorWallet.gasMode = mode; renderWalletTab(); }
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-pane').forEach(tab => tab.classList.add('hidden'));
+      document.getElementById('tab-' + tabName)?.classList.remove('hidden');
+      
+      document.querySelectorAll('.nav-link').forEach(link => {
+        link.classList.remove('bg-emerald-500/20', 'text-emerald-400', 'border-emerald-500/30');
+        link.classList.add('text-slate-300', 'hover:bg-slate-800');
+      });
 
-    function renderAIClassifierTab() {
-      document.getElementById('ai-preset-container').innerHTML = scanPresets.map(preset => `
-        <button onclick="triggerAIScanTelemetry('${preset.name}')" class="bg-slate-950 hover:bg-slate-850 border border-slate-900 p-3 rounded-xl text-left flex justify-between w-full text-xs font-bold transition-all">
-          <span>${preset.name}</span><span class="text-lg">${preset.image}</span>
-        </button>
-      `).join('');
-      const scanActive = Store.state.aiScanning;
-      document.getElementById('ai-scan-standby-view').classList.toggle('hidden', scanActive);
-      document.getElementById('ai-scan-active-view').classList.toggle('hidden', !scanActive);
-      document.getElementById('scan-laser-line').classList.toggle('hidden', !scanActive);
-      document.getElementById('ai-detected-type').innerText = Store.state.aiMaterialDetected;
-      document.getElementById('ai-detected-purity').innerText = `${Store.state.aiPurityPercentage}%`;
-      document.getElementById('ai-detected-contaminants').innerText = `${Store.state.aiContaminantLevel}%`;
-    }
-
-    function triggerAIScanTelemetry(name) {
-      const preset = scanPresets.find(p => p.name === name);
-      if (!preset) return;
-      Store.state.aiScanning = true; renderAIClassifierTab();
-      addNotification("Initializing laser scanner spectroscopy tracking...", "info");
-      safeTimeout(() => {
-        Store.state.aiScanning = false; Store.state.aiMaterialDetected = preset.type; Store.state.aiPurityPercentage = preset.purity; Store.state.aiContaminantLevel = parseFloat((100-preset.purity).toFixed(1));
-        colType = preset.type; document.getElementById('col-input-weight').value = Store.state.scaleWeight.toFixed(1);
-        addNotification(`AI telemetry signature confirmed: Sourced polymer matched as ${preset.type}`, "success");
-        renderAIClassifierTab();
-      }, 2000);
-    }
-
-    function renderConsensusTab() {
-      document.getElementById('consensus-status-badge').innerText = Store.state.consensusStage;
-      document.getElementById('consensus-nodes-grid').innerHTML = Store.state.consensusNodes.map(node => `
-        <div class="bg-slate-950 border border-slate-900 p-4 rounded-xl text-center flex flex-col justify-between">
-          <h4 class="text-xs font-bold text-slate-400">${node.name}</h4>
-          <span class="my-3 px-2 py-0.5 rounded text-[10px] bg-slate-900 inline-block border border-slate-800 text-slate-500">${node.vote}</span>
-          <p class="text-[9px] text-slate-600 font-mono">Ping: ${node.ping}</p>
-        </div>
-      `).join('');
-      document.getElementById('cli-console-pane').innerHTML = Store.state.cliLogs.map(log => `<div class="font-mono text-[11px]">&gt; ${log}</div>`).join('');
-    }
-
-    function renderPlaybookTab() {
-      for (let i=0; i<5; i++) {
-        const el = document.getElementById(`flow-badge-${i}`);
-        if (el) { el.innerText = playbookStepIndex > i ? 'Verified' : playbookStepIndex===i ? 'Active' : `Block ${i+1}`; el.className = playbookStepIndex>i?'text-[10px] bg-emerald-500/10 text-emerald-400 rounded px-1.5':'text-[10px] bg-slate-900 text-slate-500 rounded px-1.5'; }
+      const activeBtn = document.getElementById('nav-' + tabName);
+      if (activeBtn) {
+        activeBtn.classList.remove('text-slate-300', 'hover:bg-slate-800');
+        activeBtn.classList.add('bg-emerald-500/20', 'text-emerald-400', 'border-emerald-500/30');
       }
-      const path = document.getElementById('throughput-path');
-      if (path) {
-        const coords = Store.state.throughputHistory; const width = 90/(coords.length-1);
-        let pathStr = `M 5 ${100 - coords[0]}`;
-        for(let i=1; i<coords.length; i++) pathStr += ` L ${5 + i*width} ${100 - coords[i]}`;
-        path.setAttribute('d', pathStr);
+
+      Store.state.activeTab = tabName;
+    }
+
+    function toggleSimulatorOption(option) {
+      Store.state[option] = !Store.state[option];
+      const btn = document.getElementById(`toggle-${option}`);
+      if (btn) {
+        btn.querySelector('div').classList.toggle('translate-x-4');
       }
-      document.getElementById('playbook-btn-text').innerText = playbookActiveInstance ? `Processing Stage...` : "Execute Next Lifecycle Stage";
+    }
+
+    function handleLogout() {
+      Store.state.isLoggedIn = false;
+      syncStateUI();
+      document.getElementById('form-login').reset();
+      document.getElementById('form-register').reset();
+      addNotification('Logged out successfully', 'info');
+    }
+
+    function handleAIChatSubmit(event) {
+      event.preventDefault();
+      const input = document.getElementById('ai-query-input');
+      const query = input.value.trim();
+      
+      if (!query) return;
+
+      const chatLogs = document.getElementById('ai-chat-logs');
+      
+      // User message
+      const userMsg = document.createElement('div');
+      userMsg.className = 'bg-slate-950/50 p-2 rounded text-slate-300';
+      userMsg.textContent = `You: ${query}`;
+      chatLogs.appendChild(userMsg);
+
+      // AI response
+      const aiMsg = document.createElement('div');
+      aiMsg.className = 'bg-emerald-950/30 p-2 rounded text-emerald-300';
+      aiMsg.textContent = `AI: Analyzing your query about "${query}". System metrics are optimized.`;
+      chatLogs.appendChild(aiMsg);
+
+      input.value = '';
+      chatLogs.scrollTop = chatLogs.scrollHeight;
     }
 
     function executeSandboxStep() {
-      playbookActiveInstance = true; renderPlaybookTab();
-      if (playbookStepIndex === 0) {
-        switchTab('household'); document.getElementById('hh-input-name').value = "Priya Venkat"; document.getElementById('hh-input-weight').value = "16.4"; document.getElementById('hh-input-type').value = "PET Plastics"; document.getElementById('hh-input-sector').value = "Sector 3, Dharavi";
-        safeTimeout(() => { document.querySelector('#tab-household form').dispatchEvent(new Event('submit')); playbookStepIndex = 1; playbookActiveInstance = false; renderPlaybookTab(); }, 1200);
-      } else if (playbookStepIndex === 1) {
-        switchTab('collector'); const activeHh = Store.state.households[0] || { id: "HH-101", estWeight: 14.5, type: "PET Plastics" };
-        document.getElementById('col-input-name').value = "Raju Prasad"; document.getElementById('col-input-source').value = activeHh.id; document.getElementById('col-input-weight').value = activeHh.estWeight; colType = activeHh.type;
-        safeTimeout(() => { document.querySelector('#tab-collector form').dispatchEvent(new Event('submit')); playbookStepIndex = 2; playbookActiveInstance = false; renderPlaybookTab(); }, 1200);
-      } else if (playbookStepIndex === 2) {
-        switchTab('aggregator'); selectedBatches = Store.state.collections.map(c=>c.id);
-        safeTimeout(() => { executeAggregatorConsolidation(); playbookStepIndex = 3; playbookActiveInstance = false; renderPlaybookTab(); }, 1200);
-      } else if (playbookStepIndex === 3) {
-        switchTab('recycler'); const avail = Store.state.containers[0] || { id: "CONT-901" };
-        safeTimeout(() => { purchaseComplianceContainer(avail.id); playbookStepIndex = 4; playbookActiveInstance = false; renderPlaybookTab(); }, 1200);
-      } else if (playbookStepIndex === 4) {
-        switchTab('ledger'); safeTimeout(() => { playbookStepIndex = 0; playbookActiveInstance = false; addNotification("Sandbox loop finished successfully.", "success"); renderPlaybookTab(); }, 1200);
-      }
+      addNotification('Executing sandbox lifecycle stage...', 'info');
+      setTimeout(() => {
+        addNotification('Stage completed successfully', 'success');
+      }, 1500);
     }
 
     function rollbackSandbox() {
-      clearAllActiveTimeouts(); Store.state.households = []; Store.state.collections = []; Store.state.containers = [];
-      Store.state.ledger = [{ block: 10001, action: "GENESIS MINT", details: "Genesis setup completed.", party: "System Core", hash: "0x00000e7", parentHash: "0x000", timestamp: "2026-05-29 07:25:26", gasUsed: "0.00 Gwei" }];
-      playbookStepIndex = 0; playbookActiveInstance = false; addNotification("Sandbox state flushed.", "info"); renderPlaybookTab();
+      Store.state.ledger = [Store.state.ledger[0]];
+      renderLedger();
+      addNotification('Sandbox state cleared', 'info');
     }
 
-    function renderSlideBlock() {
-      const slide = slidesData[currentSlideIndex];
-      document.getElementById('slide-content-block').innerHTML = `
-        <div><span class="text-[10px] bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-full px-2 py-0.5">${slide.category}</span>
-        <h3 class="text-xl font-black text-white mt-3">${slide.title}</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
-          ${slide.bullets.map(b => `<div class="bg-slate-900/60 p-3 rounded-xl border border-slate-800 text-xs text-slate-300">✓ ${b}</div>`).join('')}
-        </div></div>`;
-      document.getElementById('deck-dots').innerHTML = slidesData.map((_,i) => `<button onclick='jumpToSlide(${i})' class='w-2.5 h-2.5 rounded-full ${currentSlideIndex===i?'bg-emerald-400':'bg-slate-800'}'></button>`).join('');
-    }
-    function changeSlide(dir) { currentSlideIndex = Math.max(0, Math.min(slidesData.length-1, currentSlideIndex+dir)); renderSlideBlock(); }
-    function jumpToSlide(idx) { currentSlideIndex = idx; renderSlideBlock(); }
-
-    function handleAIChatSubmit(e) {
-      e.preventDefault(); const inp = document.getElementById('ai-query-input'); const query = inp.value.trim(); if(!query) return;
-      inp.value = ''; Store.state.chatLogs.push({ sender: 'user', text: query });
-      document.getElementById('ai-chat-logs').innerHTML += `<div class='text-[10px] bg-slate-950 p-2 rounded-lg text-right text-slate-200 animate-slideUp'>${query}</div>`;
-      addNotification("Calculating circular matrix context metrics...", "info");
-      safeTimeout(() => {
-        let text = `Circularity telemetry optimized. Total Sourced materials across Mumbai checkpoints: ${Store.state.collections.reduce((a,c)=>a+c.weight,0).toFixed(1)}kg. Security anchors safe.`;
-        Store.state.chatLogs.push({ sender: 'ai', text });
-        document.getElementById('ai-chat-logs').innerHTML += `<div class='text-[10px] bg-indigo-950/40 p-2 rounded-lg text-indigo-300 animate-slideUp'>${text}</div>`;
-        document.getElementById('ai-chat-logs').scrollTop = document.getElementById('ai-chat-logs').scrollHeight;
-      }, 1000);
+    function changeSlide(direction) {
+      addNotification('Slide navigation not implemented in demo', 'info');
     }
 
-    window.onload = function() { renderSlideBlock(); syncStateUI(); };
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', () => {
+      setAuthMode('login');
+      initializeDashboard();
+    });
+
   </script>
 </body>
 </html>
